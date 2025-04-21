@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def hello():
-    return 'SHABERIBA'
+    return render_template('index.html')
 
 
 
