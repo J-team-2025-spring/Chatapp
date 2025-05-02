@@ -1,0 +1,29 @@
+* {
+    font-family: 'Noto Suns JP', sans-serif;
+}
+
+header {
+    background-color: #D9D9D9;
+    height: 138px;
+    margin: 0px;
+}
+
+.header-img {
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 100px;
+}
+
+body {
+    margin: 0px;
+    background-color: #4d4d4d;
+}
+
+.body-round {
+    background-color: white;
+    border-radius: 46px;
+    margin: 22px;
+    height: calc(100vh - 22px);
+
+}
