@@ -60,11 +60,10 @@ def signup():
     else:
         uid = uuid.uuid4()
         password = hashlib.sha256(password.encode('uff-8')).hexdigest()
-        registered_user = a
+        # registered_user = a
 
-        if registered_user != None:
-            flash('登録済みです')
-        else:
+        # if registered_user != None:
+        #     flash('登録済みです')
 
 
 
@@ -87,15 +86,15 @@ def logout():
 
 
 # チャンネル一覧画面
-@app.route('/channels', methods=['GET'])
-def channels_view():
-    uid = session.get('uid')
-    if uid is None:
-        return ("UIDなし")
-    else:
-        channels = Channel.get.all()
-        channels.reverse()
-        return("チャンネル一覧画面です。")
+# @app.route('/channels', methods=['GET'])
+# def channels_view():
+#     uid = session.get('uid')
+#     if uid is None:
+#         return ("UIDなし")
+#     else:
+#         channels = Channel.get.all()
+#         channels.reverse()
+#         return("チャンネル一覧画面です。")
 
 
 
