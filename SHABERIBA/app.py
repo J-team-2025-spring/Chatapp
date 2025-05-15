@@ -5,6 +5,7 @@ import uuid
 import re
 import os
 
+from models import User
 
 
 
@@ -42,7 +43,7 @@ def index():
 # サインアップ画面
 @app.route('/signup', methods =['GET'])
 def signup_view():
-    return ("サインアップ画面です。")
+    return render_template('signup-test.html')
 
 @app.route('/signup', methods =['POST'])
 def signup():
@@ -59,12 +60,16 @@ def signup():
         flash('メールアドレスの形式が間違っています')
     else:
         uid = uuid.uuid4()
-        password = hashlib.sha256(password.encode('uff-8')).hexdigest()
+        password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        
+
+    
+        User.create(uid, name, email, password)
         # registered_user = a
 
         # if registered_user != None:
         #     flash('登録済みです')
-
+        return redirect(url_for('login_view'))
 
 
 
@@ -86,15 +91,15 @@ def logout():
 
 
 # チャンネル一覧画面
-# @app.route('/channels', methods=['GET'])
-# def channels_view():
-#     uid = session.get('uid')
-#     if uid is None:
-#         return ("UIDなし")
-#     else:
-#         channels = Channel.get.all()
-#         channels.reverse()
-#         return("チャンネル一覧画面です。")
+@app.route('/channels', methods=['GET'])
+def channels_view():
+    uid = session.get('uid')
+    if uid is None:
+        return ("UIDなし")
+    else:
+        # channels = Channel.get.all()
+        # channels.reverse()
+        return("チャンネル一覧画面です。")
 
 
 
