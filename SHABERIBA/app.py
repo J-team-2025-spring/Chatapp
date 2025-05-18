@@ -60,7 +60,7 @@ def signup():
         flash('メールアドレスの形式が間違っています')
     else:
         uid = uuid.uuid4()
-        password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        password = hashlib.sha256(password.encode('utf-8')).hefxdigest()
         
 
     
@@ -88,6 +88,7 @@ def login_view():
 def logout():
     session.clear()
     return ("ログアウト画面です")
+
 
 
 # チャンネル一覧画面
