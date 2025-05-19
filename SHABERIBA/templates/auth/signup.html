@@ -1,0 +1,57 @@
+{% extends 'auth/base1.html' %} 
+{% block title %}
+<title>signup</title>
+{% endblock %}
+
+{% block body %}
+<div class="include-things">
+    <h1 class="main-text-signup">サインアップ</h1>
+    <form method="post" >
+        <div class="forms">
+            <div class="form1-signup">
+                <div for="" class="form-text">ユーザー名</div>
+                <div class="form">
+                    <input class="form-block"
+                        type="text"
+                        id="name"
+                        name="name"
+                        >
+                </div>
+            </div>
+            <div class="form2-signup">
+                <div for="" class="form-text">メールアドレス</div>
+                <div class="form">
+                    <input class="form-block"
+                        type="text"
+                        id="email"
+                        name="email"
+                        >
+                </div>
+            </div>
+            <div class="form3">
+                <div for="" class="form-text">パスワード</div>
+                <div class="form">
+                    <input class="form-block"
+                        type="password"
+                        id="password"
+                        name="password"
+                        >
+                </div>
+            </div>
+            <div class="form4">
+                <div for="" class="form-text">パスワード確認用</div>
+                <div class="form">
+                    <input class="form-block"
+                        type="password"
+                        id="password-confirmation"
+                        name="password-confirmation"
+                        >
+                </div>
+            </div>
+            <button taype="submit" class="button-block">
+                サインアップ
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
