@@ -1,0 +1,105 @@
+* {
+    font-family: 'Noto Suns JP', sans-serif;
+}
+
+header {
+    background-color: #D9D9D9;
+    height: 138px;
+    margin: 0px;
+}
+
+.header-img {
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 100px;
+}
+
+body {
+    margin: 0px;
+    background-color: #4d4d4d;
+}
+
+.body-round {
+    display: flex;
+    background-color: white;
+    border-radius: 46px;
+    height: 500px;
+    width: 770px;
+    margin: 90px auto; 
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.include-things{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 770px;
+    align-items: center;
+    text-align: center;
+}
+
+h1{
+    color: #1c5174;
+}
+
+.main-text-login{
+    margin-top: 60px;
+    margin-bottom: 45px;
+}
+
+.maintext-signup{
+    margin-top: 30px;
+}
+
+.forms{
+    width: 700px;
+    margin-bottom: 15px;
+}
+
+.form-text{
+    margin-right:auto; 
+    color:#363636;
+    align-items: left;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.form1-login{
+    margin-bottom: 30px;
+}
+
+.form{ 
+    width: 700px;
+}
+
+.form-block{
+    border-color: #D9D9D9;
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+    height: 40px;
+    width: 700px;
+}
+
+.other-things{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.button-block{
+    cursor: pointer;
+    margin-top: 40px;
+    border: 1px solid #ccc; 
+    background-color: #2D76BF;
+    border-radius: 5px;
+    color:white;
+    width: 700px;
+    height: 55px;
+}
+
+.signup-button-text{
+    color: #2d7fb6;
+}
