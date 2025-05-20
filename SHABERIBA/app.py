@@ -43,7 +43,7 @@ def index():
 # サインアップ画面
 @app.route('/signup', methods =['GET'])
 def signup_view():
-    return render_template('signup-test.html')
+    return render_template('auth/signup.html')
 
 @app.route('/signup', methods =['POST'])
 def signup():
@@ -60,26 +60,46 @@ def signup():
         flash('メールアドレスの形式が間違っています')
     else:
         uid = uuid.uuid4()
-        password = hashlib.sha256(password.encode('utf-8')).hefxdigest()
-        
-
+        password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        registered_user = User.find_by_email(email)
     
-        User.create(uid, name, email, password)
-        # registered_user = a
-
-        # if registered_user != None:
-        #     flash('登録済みです')
-        return redirect(url_for('login_view'))
-
+        if registered_user != None:
+            flash('登録済みの項目があります')
+        else:
+            User.create(uid, name, email, password)
+            UserId = str(uid)
+            session['uid'] = UserId
+            return redirect(url_for('login_view'))
+    return redirect(url_for('signup'))
 
 
 
 # ログイン画面
 @app.route('/login', methods=['GET'])
 def login_view():
-    return ("ログイン画面です。")
+    return render_template('auth/login.html')
 
+# ログイン処理
+@app.route('/login', methods=['POST'])
+def login_process():
+    email = request.form.get('email')
+    password = request.form.get('password')
 
+    if email =='' or password == '':
+        flash('未入力の欄があります')
+    else:
+        user = User.find_by_email(email)
+        if user is None:
+            flash('ユーザーが存在しません')
+        else:
+            hashPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            if hashPassword != user["password"]:
+                flash("パスワードが間違っています")
+            else:
+                session['uid'] = user["uid"]
+                return redirect(url_for('channels_view'))
+    return redirect(url_for('login_view'))
+    
 
 
 
@@ -96,7 +116,7 @@ def logout():
 def channels_view():
     uid = session.get('uid')
     if uid is None:
-        return ("UIDなし")
+        return redirect(url_for('login_view'))
     else:
         # channels = Channel.get.all()
         # channels.reverse()

@@ -1,4 +1,4 @@
-from flask import abort
+from flask import abort, flash
 import pymysql 
 from util.DB import DB
 
@@ -15,8 +15,8 @@ class User:
         cur.execute(sql,(uid, name, email, password, ))
         conn.commit()
     except pymysql.Error as e:
-      print(f'エラーが発生しています:{e}')
-      abort(500)
+      flash(f'エラーが発生しています:{e}')
+      abort(500) 
     finally:
       db_pool.release(conn)
   
