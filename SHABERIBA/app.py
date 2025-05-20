@@ -43,7 +43,7 @@ def index():
 # サインアップ画面
 @app.route('/signup', methods =['GET'])
 def signup_view():
-    return render_template('signup-test.html')
+    return render_template('auth/signup.html')
 
 @app.route('/signup', methods =['POST'])
 def signup():
@@ -77,7 +77,7 @@ def signup():
 # ログイン画面
 @app.route('/login', methods=['GET'])
 def login_view():
-    return render_template('login-test.html')
+    return render_template('auth/login.html')
 
 # ログイン処理
 @app.route('/login', methods=['POST'])
