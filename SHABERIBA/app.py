@@ -5,7 +5,7 @@ import uuid
 import re
 import os
 
-from models import User
+from models import User,Channel
 
 
 # 定数定義
