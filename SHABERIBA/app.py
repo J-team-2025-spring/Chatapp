@@ -107,7 +107,7 @@ def login_process():
 @app.route('/logout')
 def logout():
     session.clear()
-    return ("ログアウト画面です")
+    return ('ログアウト画面です')
 
 
 # チャンネル一覧画面
@@ -119,7 +119,11 @@ def channels_view():
     else:
         # channels = Channel.get.all()
         # channels.reverse()
-        return("チャンネル一覧画面です。")
+        return render_template('channels.html')
+    
+@app.route('/messages', methods=['GET'])
+def messages():
+    return render_template('messages.html')
 
 
 

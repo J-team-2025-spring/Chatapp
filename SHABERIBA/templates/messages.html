@@ -1,0 +1,25 @@
+{% extends 'base.html' %}{% block title %}
+<title>talkroom</title>
+{% endblock %}{% block header %}
+<div class="header-menu">
+    <a href="/channels">チャンネル一覧</a>
+    <div id="logoutModalOpen">ログアウト</div> 
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <p>ログアウトしてもよろしいですか？</p>
+            <button id="confirmLogoutBtn">ログアウト</button>
+            <button id="cancelLogoutBtn">キャンセル</button>
+        </div>
+    </div>      
+</div>
+{% endblock %}{% block body %}
+<main>
+    <div class="channel-title-box">
+        <div class="channel-box">
+            <img src="../static/img/saberiba.png" class="channel-img">
+            <div class="channel-title">チャンネル1</div>
+        </div>
+        <div class="channel-summary">チャンネル1です</div>
+    </div>
+</main>
+{% endblock %}
