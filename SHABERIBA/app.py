@@ -8,8 +8,6 @@ import os
 from models import User
 
 
-
-
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 SESSION_DAYS = 30
@@ -19,15 +17,10 @@ app.secret_key = os.getenv('SECRET_KEY', uuid.uuid4().hex)
 app.permanent_session_lifetime = timedelta(days=SESSION_DAYS)
 
 
-
-
-
-
-
-# ホーム画面（仮）
-@app.route('/', methods=['GET'])
-def hello():
-    return render_template('base.html')
+# # ホーム画面（仮）
+# @app.route('/', methods=['GET'])
+# def hello():
+#     return render_template('base.html')
 
 
 # ルートページのリダイレクト処理
@@ -69,9 +62,8 @@ def signup():
             User.create(uid, name, email, password)
             UserId = str(uid)
             session['uid'] = UserId
-            return redirect(url_for('login_view'))
+            return redirect(url_for('channels_view'))
     return redirect(url_for('signup'))
-
 
 
 # ログイン画面
@@ -100,9 +92,6 @@ def login_process():
                 return redirect(url_for('channels_view'))
     return redirect(url_for('login_view'))
     
-
-
-
 # ログアウト
 @app.route('/logout')
 def logout():
