@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+    // prettier-ignore
+    const channels = JSON.parse('{{ channels|tojson }}');
+    // prettier-ignore
+    const uid = JSON.parse('{{ uid|tojson }}');
+  </script>
+  <script
+    src="{{url_for('static',filename='create-channel-test.js')}}"
+    type="module"
+  ></script>
+  <script
+    src="{{url_for('static',filename='js/pagination.js')}}"
+    type="module"
+  ></script>
+  <script
+    src="{{url_for('static',filename='js/channels/delete-channel.js')}}"
+    type="module"
+  ></script>
+</body>
+</html>
