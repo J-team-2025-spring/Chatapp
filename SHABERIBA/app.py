@@ -119,6 +119,7 @@ def channels_view():
         channels.reverse()
         return render_template('channels.html', channels=channels,uid=uid)
     
+    
 # チャンネル作成
 @app.route('/channels', methods=['POST'])
 def create_channel():
