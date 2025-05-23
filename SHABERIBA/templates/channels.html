@@ -1,0 +1,76 @@
+{% extends 'base.html' %}{% block title %}
+<title>channels</title>
+{% endblock %}{% block header %}
+<div class="header-menu">
+    <div>チャンネル一覧</div>
+    <div id="logoutModalOpen">ログアウト</div> 
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <p>ログアウトしてもよろしいですか？</p>
+            <button id="confirmLogoutBtn">ログアウト</button>
+            <button id="cancelLogoutBtn">キャンセル</button>
+        </div>
+    </div>      
+</div>
+{% endblock %}{% block body %}
+<main>
+    <div class="create-channel">
+        <div class="create-channel-title">チャンネル作成→</div>
+        <button id="openModalBtn">
+            <img src="../static/img/add.PNG" class="add-img">
+        </button>
+        <div id="channelModal" class="modal">
+            <div class="modal-content">
+                <form id="channelForm">
+                    <h3 id="modalTitle">チャンネル作成</h3>
+                    <p>チャンネル名</p>
+                    <input type="text" placeholder="チャンネル名を入れてください" id="channelName" name="channelTitle">
+                    <p>チャンネル概要</p>
+                    <textarea id="channelSummary" placeholder="チャンネル概要を入れてください" name="channelDescription"></textarea><br>
+                    <button type="submit" id="submitBtn">OK</button>
+                    <button type="button" id="closeModalBtn">キャンセル</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% with channels = [
+        {'id': '1', 'name': 'チャンネル1', 'summary': 'これはチャンネル1です', 'creator_id': 1},
+        {'id': '2', 'name': 'チャンネル2', 'summary': 'これはチャンネル2です', 'creator_id': 2},
+        {'id': '3', 'name': 'チャンネル3', 'summary': 'これはチャンネル3です', 'creator_id': 2}
+    ], current_user = {'id': 2} %}
+        {% for channel in channels %}
+            <div class="channel-title-box" data-channel-id="{{channel.id}}">
+                <div class="channel-box">
+                    <img src="../static/img/saberiba.png" class="channel-img">
+                    <div class="channel-title">
+                        {{ channel.name }}
+                    </div>
+                    <div class="icon-set">
+                        {% if channel.creator_id == current_user.id %}  <!--id名は後で確認！-->
+                            <button>
+                                <img src="../static/img/edit-pen.png" class="edit-pen">
+                            </button>
+                            <button>
+                                <img src="../static/img/delete-trashbox.png" class="delete-trashbox">
+                            </button>
+                        {% endif %}
+                        <div id="deleteModal" class="modal">
+                            <div class="modal-content">
+                                <p>このチャンネルを削除してもよろしいですか？</p>
+                                <button id="confirmDeleteBtn">削除</button>
+                                <button id="cancelDeleteBtn">キャンセル</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="channel-summary">
+                    {{channel.summary}}
+                </div>
+            </div>
+        {% endfor%}
+    {% endwith %}
+</main>
+<script src="{{ url_for('static', filename='js/create-channel.js') }}"></script>
+<script src="{{ url_for('static', filename='js/delete-channel.js') }}"></script>
+<script src="{{ url_for('static', filename='js/logout.js')}}"></script>
+{% endblock %}
