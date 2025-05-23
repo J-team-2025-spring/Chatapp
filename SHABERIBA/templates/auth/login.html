@@ -36,11 +36,18 @@
                 <div>
                     もしくは
                 </div>
-                <div class="signup-button-text">
+                <a href="{{ url_for('signup_view') }}" class="signup-button-text">
                     サインアップ
-                </div>
+                </a>
             </div>
         </div>
     </form>
 </div>
+{% with messages = get_flashed_messages() %} {% if messages %}
+          <ul class="flashes">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %} {% endwith %}
 {% endblock %}
