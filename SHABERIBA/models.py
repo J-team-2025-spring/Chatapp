@@ -38,14 +38,12 @@ class User:
     finally:
        db_pool.release(conn)
 
-
-
 # チャンネルクラス
 class Channel:
    # チャンネル作成
    @classmethod
    def create(cls, uid, new_channel_name, new_channel_description):
-      conn = db_pool.get.conn()
+      conn = db_pool.get_conn()
       try:
          with conn.cursor() as cur:
             sql = "INSERT INTO channels (uid, name, abstract) VALUES (%s,%s,%s);"
@@ -137,3 +135,4 @@ class Channel:
          abort(500)
       finally:
          db_pool.release(conn)
+

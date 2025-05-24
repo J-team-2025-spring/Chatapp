@@ -13,8 +13,9 @@ window.addEventListener("DOMContentLoaded", () => {
   openCreateBtn.addEventListener("click", () => {
     isEditMode = false;
     editChannelId = null;
-    //form.action = "/channels";
-    //form.method = "POST";
+    form.action = "/channels";
+    form.method = "POST";
+    form.submit();
 
     modalTitle.textContent = "チャンネル作成";
     inputName.value = "";
@@ -33,8 +34,9 @@ window.addEventListener("DOMContentLoaded", () => {
       const channelBox = event.target.closest(".channel-title-box");
       editChannelId = channelBox.getAttribute("data-channel-id");
 
-      //form.action = "/channels/${editChannelId}";
-      //form.method = "POST";
+      form.action = "/channels/${editChannelId}";
+      form.method = "POST";
+      form.submit();
       
       const title = channelBox.querySelector(".channel-title").textContent.trim();
       const summary = channelBox.querySelector(".channel-summary").textContent.trim();
@@ -52,16 +54,16 @@ window.addEventListener("DOMContentLoaded", () => {
     const name = inputName.value;
     const summary = inputSummary.value;
 
-    if (isEditMode) {
-      console.log("編集モード")
-      console.log("チャンネルID：", editChannelId);
-      console.log("編集したチャンネル名：", name);
-      console.log("編集したチャンネル概要：", summary);
-    } else{
-      console.log("作成モード")
-      console.log("チャンネル名：", name);
-      console.log("チャンネル概要：", summary);
-    }
+    // if (isEditMode) {
+    //   console.log("編集モード")
+    //   console.log("チャンネルID：", editChannelId);
+    //   console.log("編集したチャンネル名：", name);
+    //   console.log("編集したチャンネル概要：", summary);
+    // } else{
+    //   console.log("作成モード")
+    //   console.log("チャンネル名：", name);
+    //   console.log("チャンネル概要：", summary);
+    // }
 
   })
 

@@ -5,9 +5,7 @@ import uuid
 import re
 import os
 
-from models import User, Channel
-
-
+from models import User,Channel
 
 
 # 定数定義
@@ -19,15 +17,10 @@ app.secret_key = os.getenv('SECRET_KEY', uuid.uuid4().hex)
 app.permanent_session_lifetime = timedelta(days=SESSION_DAYS)
 
 
-
-
-
-
-
-# ホーム画面（仮）
-@app.route('/', methods=['GET'])
-def hello():
-    return render_template('base.html')
+# # ホーム画面（仮）
+# @app.route('/', methods=['GET'])
+# def hello():
+#     return render_template('base.html')
 
 
 # ルートページのリダイレクト処理
@@ -37,8 +30,6 @@ def index():
     if uid is None:
         return redirect(url_for('login_view'))
     return redirect(url_for('channels_view'))
-
-
 
 # サインアップ画面
 @app.route('/signup', methods =['GET'])
@@ -75,7 +66,6 @@ def signup():
     return redirect(url_for('signup'))
 
 
-
 # ログイン画面
 @app.route('/login', methods=['GET'])
 def login_view():
@@ -102,15 +92,23 @@ def login_process():
                 return redirect(url_for('channels_view'))
     return redirect(url_for('login_view'))
     
-
-
-
 # ログアウト
 @app.route('/logout')
 def logout():
     session.clear()
     return ('ログアウト画面です')
 
+
+# # チャンネル一覧画面
+# @app.route('/channels', methods=['GET'])
+# def channels_view():
+#     uid = session.get('uid')
+#     if uid is None:
+#         return redirect(url_for('login_view'))
+#     else:
+#         # channels = Channel.get.all()
+#         # channels.reverse()
+#         return render_template('channels.html')
 
 # チャンネル一覧画面
 @app.route('/channels', methods=['GET'])
@@ -121,9 +119,9 @@ def channels_view():
     else:
         channels = Channel.get_all()
         channels.reverse()
-        return render_template('channels-test.html', channels=channels,uid=uid)
+        return render_template('channels.html', channels=channels,uid=uid)
     
-
+    
 # チャンネル作成
 @app.route('/channels', methods=['POST'])
 def create_channel():
@@ -131,7 +129,7 @@ def create_channel():
     if uid is None:
         return redirect(url_for('login_view'))
     
-    channel_name = request.form.get('channnelTitle')
+    channel_name = request.form.get('channelTitle')
     channel = Channel.find_by_name(channel_name)
     if channel == None:
         channel_description = request.form.get('channelDescription')
@@ -139,8 +137,8 @@ def create_channel():
         return redirect(url_for('channels_view'))
     else:
         error = '既に同じ名前のチャンネルが存在します'
+        return redirect(url_for('channels_view'))
         #  return render_template('error/error.html', error_message=error)
-    
 
 # チャンネル編集
 @app.route('/channels/edit/<cid>', methods=['POST'])
@@ -171,15 +169,9 @@ def delete_channel(cid):
         Channel.delete(cid)
     return redirect(url_for('channels_viwe'))
     
-
-
-
-
-
-
-
-
-
+# @app.route('/messages', methods=['GET'])
+# def messages():
+#     return render_template('messages.html')
 
 
 
