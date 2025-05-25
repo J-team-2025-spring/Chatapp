@@ -16,13 +16,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', uuid.uuid4().hex)
 app.permanent_session_lifetime = timedelta(days=SESSION_DAYS)
 
-
-# # ホーム画面（仮）
-# @app.route('/', methods=['GET'])
-# def hello():
-#     return render_template('base.html')
-
-
 # ルートページのリダイレクト処理
 @app.route('/', methods=['GET'])
 def index():
@@ -97,17 +90,6 @@ def logout():
     return ('ログアウト画面です')
 
 
-# # チャンネル一覧画面
-# @app.route('/channels', methods=['GET'])
-# def channels_view():
-#     uid = session.get('uid')
-#     if uid is None:
-#         return redirect(url_for('login_view'))
-#     else:
-#         # channels = Channel.get.all()
-#         # channels.reverse()
-#         return render_template('channels.html')
-
 # チャンネル一覧画面
 @app.route('/channels', methods=['GET'])
 def channels_view():
@@ -167,9 +149,9 @@ def delete_channel(cid):
         Channel.delete(cid)
     return redirect(url_for('channels_viwe'))
     
-# @app.route('/messages', methods=['GET'])
-# def messages():
-#     return render_template('messages.html')
+@app.route('/messages', methods=['GET'])
+def messages():
+     return render_template('messages.html')
 
 @app.errorhandler(404)
 def page_not_found(error):

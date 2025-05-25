@@ -11,12 +11,12 @@ window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("channelForm");
 
   openCreateBtn.addEventListener("click", () => {
-    console.log("モーダル起動")
+    // console.log("")
     isEditMode = false;
     editChannelId = null;
     form.action = "/channels";
     form.method = "POST";
-    form.submit();
+
 
     modalTitle.textContent = "チャンネル作成";
     inputName.value = "";
@@ -37,7 +37,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
       form.action = `/channels/edit/${editChannelId}`;
       form.method = "POST";
-      form.submit();
       
       const title = channelBox.querySelector(".channel-title").textContent.trim();
       const summary = channelBox.querySelector(".channel-summary").textContent.trim();
@@ -49,8 +48,8 @@ window.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // form.addEventListener("submit", (event) => {
-  //   event.preventDefault();
+  form.addEventListener("submit", (event) => {
+  //event.preventDefault();
 
   //   const name = inputName.value;
   //   const summary = inputSummary.value;
@@ -72,4 +71,5 @@ window.addEventListener("DOMContentLoaded", () => {
   closeBtn.addEventListener("click", () => {
     modal.style.display = "none";
   });
-});
+  })
+};
