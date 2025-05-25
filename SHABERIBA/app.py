@@ -5,9 +5,7 @@ import uuid
 import re
 import os
 
-from models import User
-
-
+from models import User,Channel
 
 
 # 定数定義
@@ -19,15 +17,10 @@ app.secret_key = os.getenv('SECRET_KEY', uuid.uuid4().hex)
 app.permanent_session_lifetime = timedelta(days=SESSION_DAYS)
 
 
-
-
-
-
-
-# ホーム画面（仮）
-@app.route('/', methods=['GET'])
-def hello():
-    return render_template('base.html')
+# # ホーム画面（仮）
+# @app.route('/', methods=['GET'])
+# def hello():
+#      return render_template('base.html')
 
 
 # ルートページのリダイレクト処理
@@ -37,8 +30,6 @@ def index():
     if uid is None:
         return redirect(url_for('login_view'))
     return redirect(url_for('channels_view'))
-
-
 
 # サインアップ画面
 @app.route('/signup', methods =['GET'])
@@ -69,9 +60,8 @@ def signup():
             User.create(uid, name, email, password)
             UserId = str(uid)
             session['uid'] = UserId
-            return redirect(url_for('login_view'))
+            return redirect(url_for('channels_view'))
     return redirect(url_for('signup'))
-
 
 
 # ログイン画面
@@ -100,17 +90,18 @@ def login_process():
                 return redirect(url_for('channels_view'))
     return redirect(url_for('login_view'))
     
-
-
-
 # ログアウト
 @app.route('/logout')
 def logout():
     session.clear()
-    return ("ログアウト画面です")
+    return ('ログアウト画面です')
 
 
+<<<<<<< HEAD
 
+=======
+#
+>>>>>>> 7cff5b6ea6fc232cffb022c503e8c18bacf3f660
 # チャンネル一覧画面
 @app.route('/channels', methods=['GET'])
 def channels_view():
@@ -118,9 +109,60 @@ def channels_view():
     if uid is None:
         return redirect(url_for('login_view'))
     else:
-        # channels = Channel.get.all()
-        # channels.reverse()
-        return("チャンネル一覧画面です。")
+        channels = Channel.get_all()
+        channels.reverse()
+        return render_template('channels.html', channels=channels,uid=uid)
+    
+    
+# チャンネル作成
+@app.route('/channels', methods=['POST'])
+def create_channel():
+    uid = session.get('uid')
+    if uid is None:
+        return redirect(url_for('login_view'))
+    
+    channel_name = request.form.get('channelTitle')
+    channel = Channel.find_by_name(channel_name)
+    if channel == None:
+        channel_description = request.form.get('channelDescription')
+        Channel.create(uid, channel_name, channel_description)
+        return redirect(url_for('channels_view'))
+    else:
+        error = '既に同じ名前のチャンネルが存在します'
+        return render_template('error/error.html', error_message=error)
+
+# チャンネル編集
+@app.route('/channels/edit/<cid>', methods=['POST'])
+def edit_channel(cid):
+    uid = session.get('uid')
+    if uid is None:
+        return redirect(url_for('login_view'))
+    
+    channel_name = request.form.get('channelTitle')
+    channel_description = request.form.get('channelDescription')
+
+    Channel.edit(uid, channel_name, channel_description, cid)
+    return redirect(f'/channels/{cid}/messages')
+
+
+# チャンネル削除
+@app.route('/channels/delete/<cid>', methods=['POST'])
+def delete_channel(cid):
+    uid = session.get('uid')
+    if uid is None:
+        return redirect(url_for('login_view'))
+    
+    channel = Channel.find_by_cid(cid)
+
+    if channel["uid"] != uid:
+        flash('チャンネルを削除できるのは作成者のみです')
+    else:
+        Channel.delete(cid)
+    return redirect(url_for('channels_viwe'))
+    
+@app.route('/messages', methods=['GET'])
+def messages():
+     return render_template('messages.html')
 
 
 
