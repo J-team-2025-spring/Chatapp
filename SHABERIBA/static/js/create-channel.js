@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const channelBox = event.target.closest(".channel-title-box");
       editChannelId = channelBox.getAttribute("data-channel-id");
 
-      form.action = "/channels/${editChannelId}";
+      form.action = `/channels/edit/${editChannelId}`;
       form.method = "POST";
       
       const title = channelBox.querySelector(".channel-title").textContent.trim();
@@ -46,7 +46,7 @@ window.addEventListener("DOMContentLoaded", () => {
       modal.style.display = "flex";
     })
   })
-
+  
   form.addEventListener("submit", (event) => {
     //event.preventDefault();
 

@@ -16,13 +16,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', uuid.uuid4().hex)
 app.permanent_session_lifetime = timedelta(days=SESSION_DAYS)
 
-
-# # ホーム画面（仮）
-# @app.route('/', methods=['GET'])
-# def hello():
-#      return render_template('base.html')
-
-
 # ルートページのリダイレクト処理
 @app.route('/', methods=['GET'])
 def index():
@@ -97,7 +90,6 @@ def logout():
     return ('ログアウト画面です')
 
 
-#
 # チャンネル一覧画面
 @app.route('/channels', methods=['GET'])
 def channels_view():
@@ -125,7 +117,8 @@ def create_channel():
         return redirect(url_for('channels_view'))
     else:
         error = '既に同じ名前のチャンネルが存在します'
-        return render_template('error/error.html', error_message=error)
+        return redirect(url_for('channels_view'))
+        # return render_template('error/error.html', error_message=error)
 
 # チャンネル編集
 @app.route('/channels/edit/<cid>', methods=['POST'])
@@ -159,9 +152,6 @@ def delete_channel(cid):
 @app.route('/messages', methods=['GET'])
 def messages():
      return render_template('messages.html')
-
-
-
 
 @app.errorhandler(404)
 def page_not_found(error):
