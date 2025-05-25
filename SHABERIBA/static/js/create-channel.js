@@ -47,29 +47,27 @@ window.addEventListener("DOMContentLoaded", () => {
       modal.style.display = "flex";
     })
   })
-
+  
   form.addEventListener("submit", (event) => {
-  //event.preventDefault();
+    //event.preventDefault();
 
-  //   const name = inputName.value;
-  //   const summary = inputSummary.value;
+    const name = inputName.value;
+    const summary = inputSummary.value;
 
+    // if (isEditMode) {
+    //   console.log("編集モード")
+    //   console.log("チャンネルID：", editChannelId);
+    //   console.log("編集したチャンネル名：", name);
+    //   console.log("編集したチャンネル概要：", summary);
+    // } else{
+    //   console.log("作成モード")
+    //   console.log("チャンネル名：", name);
+    //   console.log("チャンネル概要：", summary);
+    // }
 
-  //   // if (isEditMode) {
-  //   //   console.log("編集モード")
-  //   //   console.log("チャンネルID：", editChannelId);
-  //   //   console.log("編集したチャンネル名：", name);
-  //   //   console.log("編集したチャンネル概要：", summary);
-  //   // } else{
-  //   //   console.log("作成モード")
-  //   //   console.log("チャンネル名：", name);
-  //   //   console.log("チャンネル概要：", summary);
-  //   // }
-
-  // })
+  })
 
   closeBtn.addEventListener("click", () => {
     modal.style.display = "none";
   });
-  })
-};
+});
