@@ -11,7 +11,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("channelForm");
 
   openCreateBtn.addEventListener("click", () => {
-    // console.log("")
     isEditMode = false;
     editChannelId = null;
     form.action = "/channels";
