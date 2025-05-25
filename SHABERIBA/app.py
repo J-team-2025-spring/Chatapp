@@ -16,13 +16,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', uuid.uuid4().hex)
 app.permanent_session_lifetime = timedelta(days=SESSION_DAYS)
 
-
-# # ホーム画面（仮）
-# @app.route('/', methods=['GET'])
-# def hello():
-#      return render_template('base.html')
-
-
 # ルートページのリダイレクト処理
 @app.route('/', methods=['GET'])
 def index():
@@ -97,11 +90,6 @@ def logout():
     return ('ログアウト画面です')
 
 
-<<<<<<< HEAD
-
-=======
-#
->>>>>>> 7cff5b6ea6fc232cffb022c503e8c18bacf3f660
 # チャンネル一覧画面
 @app.route('/channels', methods=['GET'])
 def channels_view():
