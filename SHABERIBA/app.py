@@ -135,7 +135,8 @@ def create_channel():
         return redirect(url_for('channels_view'))
     else:
         error = '既に同じ名前のチャンネルが存在します'
-        #  return render_template('error/error.html', error_message=error)
+        return redirect(url_for('channels_view'))
+        # return render_template('error/error.html', error_message=error)
 
 # チャンネル編集
 @app.route('/channels/edit/<cid>', methods=['POST'])
@@ -169,9 +170,6 @@ def delete_channel(cid):
 # @app.route('/messages', methods=['GET'])
 # def messages():
 #     return render_template('messages.html')
-
-
-
 
 @app.errorhandler(404)
 def page_not_found(error):

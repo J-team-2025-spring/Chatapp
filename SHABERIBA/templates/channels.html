@@ -21,7 +21,7 @@
         </button>
         <div id="channelModal" class="modal">
             <div class="modal-content">
-                <form id="channelForm">
+                <form id="channelForm" action="/channels" method="POST">
                     <h3 id="modalTitle">チャンネル作成</h3>
                     <p>チャンネル名</p>
                     <input type="text" placeholder="チャンネル名を入れてください" id="channelName" name="channelTitle">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="icon-set">
                         {% if channel.creator_id == current_user.id %}  <!--id名は後で確認！-->
-                            <button>
+                            <button type="button">
                                 <img src="../static/img/edit-pen.png" class="edit-pen">
                             </button>
                             <button>
