@@ -7,6 +7,7 @@ db_pool = DB.init_SHABERIBA_db_pool()
 #ユーザークラス
 class User:
   @classmethod
+  # ユーザー作成
   def create(cls, uid, name, email, password):
     conn = db_pool.get_conn()
     try:
@@ -22,6 +23,7 @@ class User:
   
 
   @classmethod
+  # メールアドレスでユーザー検索
   def find_by_email(cls,email):
     conn = db_pool.get_conn()
     try:
@@ -117,7 +119,7 @@ class Channel:
          print(f'エラーが発生しています:{e}')
          abort(500)
       finally:
-         db_pool.relase(conn)
+         db_pool.release(conn)
 
     # チャンネル削除
    @classmethod
@@ -134,3 +136,57 @@ class Channel:
       finally:
          db_pool.release(conn)
 
+
+# メッセージクラス
+class Message:
+   @classmethod
+   def create(cls, uid, cid, message):
+      conn = db_pool.get_conn()
+      try:
+         with conn.cursor() as cur:
+            sql = "INSERT INTO messages(uid, cid, message) VALUES(%s, %s, %s)"
+            cur.execute(sql,(uid, cid, message,))
+            conn.commit()
+      except pymysql.Error as e:
+         print(f'エラーが発生しています:{e}')
+         abort(500)
+      finally:
+         db_pool.release(conn)
+                         
+
+   @classmethod
+   #特定チャンネルの全メッセージ取得
+   def get_all(cls, cid):
+       conn = db_pool.get_conn()
+       try:
+           with conn.cursor() as cur:
+               sql = """
+                   SELECT id, u.uid, user_name, message 
+                   FROM messages AS m 
+                   INNER JOIN users AS u ON m.uid = u.uid 
+                   WHERE cid = %s 
+                   ORDER BY id ASC;
+               """
+               cur.execute(sql, (cid,))
+               messages = cur.fetchall()
+               return messages
+       except pymysql.Error as e:
+           print(f'エラーが発生しています：{e}')
+           abort(500)
+       finally:
+           db_pool.release(conn)
+
+
+   @classmethod
+   def delete(cls, message_id):
+       conn = db_pool.get_conn()
+       try:
+           with conn.cursor() as cur:
+               sql = "DELETE FROM messages WHERE id=%s;"
+               cur.execute(sql, (message_id,))
+               conn.commit()
+       except pymysql.Error as e:
+           print(f'エラーが発生しています：{e}')
+           abort(500)
+       finally:
+           db_pool.release(conn)
