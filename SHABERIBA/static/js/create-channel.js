@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
     editChannelId = null;
     form.action = "/channels";
     form.method = "POST";
-    form.submit();
+
 
     modalTitle.textContent = "チャンネル作成";
     inputName.value = "";
@@ -36,7 +36,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
       form.action = "/channels/${editChannelId}";
       form.method = "POST";
-      form.submit();
       
       const title = channelBox.querySelector(".channel-title").textContent.trim();
       const summary = channelBox.querySelector(".channel-summary").textContent.trim();
@@ -49,7 +48,7 @@ window.addEventListener("DOMContentLoaded", () => {
   })
 
   form.addEventListener("submit", (event) => {
-    event.preventDefault();
+    //event.preventDefault();
 
     const name = inputName.value;
     const summary = inputSummary.value;

@@ -5,7 +5,7 @@ import uuid
 import re
 import os
 
-from models import User,Channel
+from models import User,Channel, Message
 
 
 # 定数定義
@@ -20,7 +20,7 @@ app.permanent_session_lifetime = timedelta(days=SESSION_DAYS)
 # # ホーム画面（仮）
 # @app.route('/', methods=['GET'])
 # def hello():
-#     return render_template('base.html')
+#      return render_template('base.html')
 
 
 # ルートページのリダイレクト処理
@@ -99,17 +99,7 @@ def logout():
     return ('ログアウト画面です')
 
 
-# # チャンネル一覧画面
-# @app.route('/channels', methods=['GET'])
-# def channels_view():
-#     uid = session.get('uid')
-#     if uid is None:
-#         return redirect(url_for('login_view'))
-#     else:
-#         # channels = Channel.get.all()
-#         # channels.reverse()
-#         return render_template('channels.html')
-
+#
 # チャンネル一覧画面
 @app.route('/channels', methods=['GET'])
 def channels_view():
@@ -137,8 +127,7 @@ def create_channel():
         return redirect(url_for('channels_view'))
     else:
         error = '既に同じ名前のチャンネルが存在します'
-        return redirect(url_for('channels_view'))
-        #  return render_template('error/error.html', error_message=error)
+        return render_template('error/error.html', error_message=error)
 
 # チャンネル編集
 @app.route('/channels/edit/<cid>', methods=['POST'])
@@ -169,9 +158,45 @@ def delete_channel(cid):
         Channel.delete(cid)
     return redirect(url_for('channels_viwe'))
     
-# @app.route('/messages', methods=['GET'])
-# def messages():
-#     return render_template('messages.html')
+
+
+@app.route('/channels/<cid>/messages', methods=['GET'])
+def detail(cid):
+    uid = session.get('uid')
+    if uid is None:
+        return redirect(url_for('login_view'))
+
+    channel = Channel.find_by_cid(cid)
+    messages = Message.get_all(cid)
+
+    return render_template('messages.html', messages=messages, channel=channel, uid=uid)
+
+
+# メッセージの投稿
+@app.route('/channels/<cid>/messages', methods=['POST'])
+def create_message(cid):
+    uid = session.get('uid')
+    if uid is None:
+        return redirect(url_for('login_view'))
+
+    message = request.form.get('message')
+
+    if message:
+        Message.create(uid, cid, message)
+
+    return redirect('/channels/{cid}/messages'.format(cid = cid))
+
+
+# メッセージの削除
+@app.route('/channels/<cid>/messages/<message_id>', methods=['POST'])
+def delete_message(cid, message_id):
+    uid = session.get('uid')
+    if uid is None:
+        return redirect(url_for('login_view'))
+
+    if message_id:
+        Message.delete(message_id)
+    return redirect('/channels/{cid}/messages'.format(cid = cid))
 
 
 
