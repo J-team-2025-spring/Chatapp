@@ -99,7 +99,6 @@ def logout():
     return ('ログアウト画面です')
 
 
-#
 # チャンネル一覧画面
 @app.route('/channels', methods=['GET'])
 def channels_view():
@@ -140,7 +139,8 @@ def edit_channel(cid):
     channel_description = request.form.get('channelDescription')
 
     Channel.edit(uid, channel_name, channel_description, cid)
-    return redirect(f'/channels/{cid}/messages')
+    return redirect(url_for('channels_view'))
+    # return redirect(f'/channels/{cid}/messages')
 
 
 # チャンネル削除
@@ -156,7 +156,7 @@ def delete_channel(cid):
         flash('チャンネルを削除できるのは作成者のみです')
     else:
         Channel.delete(cid)
-    return redirect(url_for('channels_viwe'))
+    return redirect(url_for('channels_view'))
     
 
 
