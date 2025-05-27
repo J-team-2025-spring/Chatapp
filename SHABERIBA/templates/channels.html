@@ -45,9 +45,11 @@
                     {% endif %}
                     <div id="deleteModal" class="modal">
                         <div class="modal-content">
-                            <p>このチャンネルを削除してもよろしいですか？</p>
-                            <button id="confirmDeleteBtn">削除</button>
-                            <button id="cancelDeleteBtn">キャンセル</button>
+                            <form id="deleteForm" method="POST">
+                                <p>このチャンネルを削除してもよろしいですか？</p>
+                                <button id="confirmDeleteBtn">削除</button>
+                                <button id="cancelDeleteBtn">キャンセル</button>
+                            </form>
                         </div>
                     </div>
                 </div>

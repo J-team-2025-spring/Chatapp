@@ -5,6 +5,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const deleteModal = document.getElementById("deleteModal");
     const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
     const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+    const form =document.getElementById("deleteForm");
 
     let targetToDelete = null;
 
@@ -17,8 +18,9 @@ window.addEventListener("DOMContentLoaded", () => {
     })
 
     confirmDeleteBtn.addEventListener("click", () => {
-        console.log("削除されるチャンネルID:", deleteChannelId);
-        console.log("削除処理通りました");
+        form.action = `/channels/delete/${deleteChannelId}`;
+        form.method = "POST";
+        
         deleteModal.style.display = "none";
         targetToDelete = "null";
     })

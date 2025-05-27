@@ -22,7 +22,11 @@
                 <div class="my-messages">
                     <div class="spacer"></div>
                     <p class="box-right">{{ message.message }}</p>
-                    <button name="message.id"><img src="{{ url_for('static', filename='img/delete-trashbox.png') }}" class="delete-message"></button>
+                    <form action="/channels/{{ channel.id }}/messages/{{ message.id }}" method="POST">
+                        <button name="message.id">
+                            <img src="{{ url_for('static', filename='img/delete-trashbox.png') }}" class="delete-message">
+                        </button>
+                    </form>
                 </div>
                 {% else %}
                 <div class="box-left">

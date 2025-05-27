@@ -126,7 +126,7 @@ class Channel:
    def delete(cls, cid):
       conn = db_pool.get_conn()
       try:
-         with conn.curosr() as cur:
+         with conn.cursor() as cur:
             sql = "DELETE FROM channels WHERE id=%s;"
             cur.execute(sql,(cid,))
             conn.commit()
