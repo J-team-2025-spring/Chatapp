@@ -27,6 +27,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     cancelDeleteBtn.addEventListener("click", () => {
         deleteModal.style.display = "none";
-        targetToDelete = "null";
+        // targetToDelete = "null";
     })
 });
