@@ -40,6 +40,7 @@ body {
 .main {
     flex: 1;
     overflow-y: auto;
+    padding-bottom: 220px;
 }
 
 .create-channel {
@@ -79,7 +80,7 @@ body {
 
 .channel-img {
     margin: 15px;
-    border-radius: 50%;
+    border-radius: 15px;
     width: 70px;
     height: 70px; 
 }
@@ -293,4 +294,92 @@ body {
 #confirmDeleteBtn:hover,
 #confirmLogoutBtn:hover {
   background-color: indianred;
+}
+
+.message-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+.message-area {
+  min-height: 0;
+  max-height: calc(100vh - 226px - 115px - 44px - 130px);
+}
+
+.my-messages {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.box-right {
+  width: 50%;
+  height: 70px;
+  background-color: #DDDDDD;
+  border: solid, #4d4d4d;
+}
+
+.delete-message {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.box-left {
+  width: 90%;
+  justify-self: start;
+  margin-left: 10px;
+}
+
+.user-name {
+  color: #4d4d4d;
+  font-size: 14px;
+  margin: 0;
+}
+
+.one-message-row {
+  display: flex;
+}
+
+.other-message {
+  width: 50%;
+  height: 70px;
+  border: solid, #4d4d4d;
+}
+
+.spacer {
+  width: 50%;
+  height: 70px;
+}
+
+.message-create-box {
+  min-height: 200px;
+}
+
+.message-create-box form {
+  display: flex;
+  position: fixed;
+  width: 96.5%;
+  background-color: #DDDDDD;
+  border-radius: 16px;
+  z-index: 999;
+  bottom: 0;
+}
+
+.message-box {
+  width: 90%;
+  min-height: 180px;
+  margin: 10px;
+  background-color: white;
+  border-radius: 16px; 
+  font-size: 20px;
+  padding: 15px 15px;
+}
+
+.paper-plane {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  justify-content: right;
 }

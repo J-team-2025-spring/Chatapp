@@ -6,13 +6,13 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
      {% block title %}{% endblock %}
      <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
-     <link class="head-icon" rel="icon" href="../static/img/favicon.ico">
+     <link class="head-icon" rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
      <link rel="preconnect" href="https://fonts.googleapis.com"> 
      <link rel="preconnect" href ="https://fonts.gstatic.com" crossorigin> 
      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
  </head>  
  <header>
-    <img src="../static/img/logo-trimming.png" class="header-img">
+    <img src="{{ url_for('static', filename='img/logo-trimming.png') }}" class="header-img">
     {% block header %}{% endblock %}
  </header>  
  <body>
