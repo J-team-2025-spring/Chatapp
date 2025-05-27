@@ -3,23 +3,49 @@
 {% endblock %}{% block header %}
 <div class="header-menu">
     <a href="/channels">チャンネル一覧</a>
-    <div id="logoutModalOpen">ログアウト</div> 
-    <div id="logoutModal" class="modal">
-        <div class="modal-content">
-            <p>ログアウトしてもよろしいですか？</p>
-            <button id="confirmLogoutBtn">ログアウト</button>
-            <button id="cancelLogoutBtn">キャンセル</button>
-        </div>
-    </div>      
+    {% include 'logout-modal.html' %}
 </div>
 {% endblock %}{% block body %}
 <main>
     <div class="channel-title-box">
         <div class="channel-box">
-            <img src="../static/img/saberiba.png" class="channel-img">
-            <div class="channel-title">チャンネル1</div>
+            <img src="{{ url_for('static', filename='img/smile-reatekun (2).png') }}" class="channel-img">
+            <div class="channel-title">{{ channel.name }}</div>
         </div>
-        <div class="channel-summary">チャンネル1です</div>
+        <div class="channel-summary">{{ channel.abstract }}</div>
     </div>
+    
+    <div class="message-page"> 
+        <div class="message-area"> 
+            {% for message in messages %}
+                {% if message.uid == uid %}
+                <div class="my-messages">
+                    <div class="spacer"></div>
+                    <p class="box-right">{{ message.message }}</p>
+                    <button name="message.id"><img src="{{ url_for('static', filename='img/delete-trashbox.png') }}" class="delete-message"></button>
+                </div>
+                {% else %}
+                <div class="box-left">
+                    <p class="user-name">{{ message.user_name }}</p>
+                    <div class="one-message-row">
+                        <p class="other-message">{{ message.message }}</p>
+                        <div class="spacer"></div>
+                    </div>  
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
 </main>
+<div class="message-create-box">
+    <form method="POST">
+        <textarea name="message" class="message-box"></textarea>
+        <button type="submit">
+            <img src="{{ url_for('static', filename='img/paperplane.png') }}" class="paper-plane">
+        </button>
+    </form>
+    
+</div>
+<script src="{{ url_for('static', filename='js/logout.js')}}"></script>
 {% endblock %}
