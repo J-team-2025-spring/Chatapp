@@ -22,11 +22,11 @@ window.addEventListener("DOMContentLoaded", () => {
         form.method = "POST";
         
         deleteModal.style.display = "none";
-        targetToDelete = "null";
+        targetToDelete = null;
     })
 
     cancelDeleteBtn.addEventListener("click", () => {
         deleteModal.style.display = "none";
-        // targetToDelete = "null";
+        targetToDelete = null;
     })
 });
