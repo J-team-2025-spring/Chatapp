@@ -41,13 +41,13 @@
                 </a>
             </div>
         </div>
-    </form>
-</div>
-{% with messages = get_flashed_messages() %} {% if messages %}
-          <ul class="flashes">
+        {% with messages = get_flashed_messages() %} {% if messages %}
+          <div class="flashes">
             {% for message in messages %}
-            <li>{{ message }}</li>
+            <div>{{ message }}</div>
             {% endfor %}
-          </ul>
+          </div>
           {% endif %} {% endwith %}
 {% endblock %}
+    </form>
+</div>
