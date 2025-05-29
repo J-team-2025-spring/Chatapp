@@ -15,7 +15,18 @@
         <div id="channelModal" class="modal">
             <div class="modal-content">
                 <form id="channelForm" action="/channels" method="POST">
-                    <h3 id="modalTitle">チャンネル作成</h3>
+                    <div class="modalheader">
+                        <h3 id="modalTitle">チャンネル作成</h3>
+                        <div class="category-select">
+                            <label for="category">カテゴリー選択</label>
+                            <select id="channelCategory" name="channelCategory">
+                                <option value="category1">happy</option>
+                                <option value="category2">sad</option>
+                                <option value="category3">question</option>
+                                <option value="category4">secret</option>
+                            </select>
+                        </div>
+                    </div>
                     <p>チャンネル名</p>
                     <input type="text" placeholder="チャンネル名を入れてください" id="channelName" name="channelTitle">
                     <p>チャンネル概要</p>
@@ -30,12 +41,20 @@
     {% for channel in channels %}
         <div class="channel-title-box" data-channel-id="{{channel.id}}">
             <div class="channel-box">
-                <img src="{{ url_for('static', filename='img/smile-reatekun (2).png') }}" class="channel-img">
+                {% if channel.category == category1 %}
+                    <img src="{{ url_for('static', filename='img/smile-reatekun (2).png') }}" class="channel-img">
+                {% elif channel.category == category2 %}
+                    <img src="{{ url_for('static', filename='img/sad-reatekun (1).png') }}" class="channel-img">
+                {% elif channel.category == category3 %}
+                    <img src="{{ url_for('static', filename='img/question-reatekun (2).PNG') }}" class="channel-img">
+                {% else %}
+                    <img src="{{ url_for('static', filename='img/secret-reatekun (1).png') }}" class="channel-img">
+                {% endif %}
                 <a href="{{ url_for('detail', cid=channel.id) }}" class="channel-title">
                     {{ channel.name }}
                 </a>
                 <div class="icon-set">
-                    {% if channel.uid == uid %}  <!--id名は後で確認！-->
+                    {% if channel.uid == uid %} 
                         <button type="button">
                             <img src="../static/img/edit-pen.png" class="edit-pen">
                         </button>

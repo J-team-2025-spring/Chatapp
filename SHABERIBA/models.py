@@ -42,12 +42,12 @@ class User:
 class Channel:
    # チャンネル作成
    @classmethod
-   def create(cls, uid, new_channel_name, new_channel_description):
+   def create(cls, uid, new_channel_name, new_channel_description, category):
       conn = db_pool.get_conn()
       try:
          with conn.cursor() as cur:
-            sql = "INSERT INTO channels (uid, name, abstract) VALUES (%s,%s,%s);"
-            cur.execute(sql,(uid, new_channel_name,new_channel_description,))
+            sql = "INSERT INTO channels (uid, name, abstract, category) VALUES (%s,%s,%s,%s);"
+            cur.execute(sql,(uid, new_channel_name,new_channel_description, category))
             conn.commit()
       except pymysql.Error as e:
          print(f'エラーが発生しています:{e}')
@@ -92,12 +92,12 @@ class Channel:
 
    # チャンネル編集
    @classmethod
-   def edit(cls, uid, new_channel_name, new_channel_description, cid):
+   def edit(cls, uid, new_channel_name, new_channel_description, category, cid):
       conn = db_pool.get_conn()
       try:
          with conn.cursor() as cur:
-            sql = "UPDATE channels SET uid=%s, name=%s, abstract=%s WHERE id=%s;"
-            cur.execute(sql,(uid,new_channel_name,new_channel_description,cid,))
+            sql = "UPDATE channels SET uid=%s, name=%s, abstract=%s, category=%s WHERE id=%s;"
+            cur.execute(sql,(uid,new_channel_name,new_channel_description,category,cid))
             conn.commit()
       except pymysql.Error as e:
          print(f'エラーが発生しています:{e}')
