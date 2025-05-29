@@ -108,7 +108,11 @@ def channels_view():
     else:
         channels = Channel.get_all()
         channels.reverse()
-        return render_template('channels.html', channels=channels,uid=uid)
+
+        category1 = 'category1'
+        category2 = 'category2'
+        category3 = 'category3'
+        return render_template('channels.html', channels=channels, uid=uid, category1=category1, category2=category2, category3=category3)
     
     
 # チャンネル作成
@@ -122,7 +126,8 @@ def create_channel():
     channel = Channel.find_by_name(channel_name)
     if channel == None:
         channel_description = request.form.get('channelDescription')
-        Channel.create(uid, channel_name, channel_description)
+        channel_category = request.form.get('channelCategory')
+        Channel.create(uid, channel_name, channel_description, channel_category)
         return redirect(url_for('channels_view'))
     else:
         error = '既に同じ名前のチャンネルが存在します'
@@ -137,8 +142,9 @@ def edit_channel(cid):
     
     channel_name = request.form.get('channelTitle')
     channel_description = request.form.get('channelDescription')
+    channel_category = request.form.get('channelCategory')
 
-    Channel.edit(uid, channel_name, channel_description, cid)
+    Channel.edit(uid, channel_name, channel_description, channel_category, cid)
     return redirect(url_for('channels_view'))
     # return redirect(f'/channels/{cid}/messages')
 
@@ -169,7 +175,11 @@ def detail(cid):
     channel = Channel.find_by_cid(cid)
     messages = Message.get_all(cid)
 
-    return render_template('messages.html', messages=messages, channel=channel, uid=uid)
+    category1 = 'category1'
+    category2 = 'category2'
+    category3 = 'category3'
+
+    return render_template('messages.html', messages=messages, channel=channel, uid=uid, category1=category1, category2=category2, category3=category3)
 
 
 # メッセージの投稿

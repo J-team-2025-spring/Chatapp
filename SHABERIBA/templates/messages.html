@@ -9,7 +9,15 @@
 <main>
     <div class="channel-title-box">
         <div class="channel-box">
-            <img src="{{ url_for('static', filename='img/smile-reatekun (2).png') }}" class="channel-img">
+            {% if channel.category == category1 %}
+                <img src="{{ url_for('static', filename='img/smile-reatekun (2).png') }}" class="channel-img">
+            {% elif channel.category == category2 %}
+                <img src="{{ url_for('static', filename='img/sad-reatekun (1).png') }}" class="channel-img">
+            {% elif channel.category == category3 %}
+                <img src="{{ url_for('static', filename='img/question-reatekun (2).PNG') }}" class="channel-img">
+            {% else %}
+                <img src="{{ url_for('static', filename='img/secret-reatekun (1).png') }}" class="channel-img">
+            {% endif %}
             <div class="channel-title">{{ channel.name }}</div>
         </div>
         <div class="channel-summary">{{ channel.abstract }}</div>

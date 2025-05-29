@@ -6,6 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const modalTitle = document.getElementById("modalTitle");
   const openCreateBtn = document.getElementById("openModalBtn");
   const closeBtn = document.getElementById("closeModalBtn");
+  const inputCategory = document.getElementById("channelCategory");
   const inputName = document.getElementById("channelName");
   const inputSummary = document.getElementById("channelSummary");
   const form = document.getElementById("channelForm");
@@ -18,6 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     modalTitle.textContent = "チャンネル作成";
+    inputCategory.value = "";
     inputName.value = "";
     inputSummary.value = "";    
     modal.style.display = "flex";
@@ -50,6 +52,7 @@ window.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (event) => {
     //event.preventDefault();
 
+    const category = inputCategory.value;
     const name = inputName.value;
     const summary = inputSummary.value;
 

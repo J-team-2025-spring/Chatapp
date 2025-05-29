@@ -257,6 +257,20 @@ body {
   border: 10px solid #4F7694;
 }
 
+.category-select {
+  display: flex;
+  align-items: center;
+}
+
+label {
+  font-size: 25px;
+}
+
+select {
+  height: 40px;
+  font-size: 25px;
+}
+
 #channelName {
   max-width: 85vw;
   width: 800px;
