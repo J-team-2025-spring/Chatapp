@@ -7,6 +7,16 @@
 </div>
 {% endblock %}{% block body %}
 <main>
+    <div class="pagination-container">
+        <div id="backbtn">
+            ←
+        </div>
+        <ul id="pagenation">
+        </ul>
+        <div id="nextbtn">
+            →
+        </div>
+    </div>
     <div class="create-channel">
         <div class="create-channel-title">チャンネル作成→</div>
         <button id="openModalBtn">
@@ -83,4 +93,5 @@
 <script src="{{ url_for('static', filename='js/create-channel.js') }}"></script>
 <script src="{{ url_for('static', filename='js/delete-channel.js') }}"></script>
 <script src="{{ url_for('static', filename='js/logout.js')}}"></script>
+<script src="{{ url_for('static', filename='js/pagination.js')}}"></script>
 {% endblock %}
